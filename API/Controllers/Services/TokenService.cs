@@ -1,7 +1,6 @@
 using API.Entities;
 using API.Interfaces;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -26,7 +25,7 @@ namespace API.Controllers.Services
               new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
             };
 
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.EcdsaSha512Signature);
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(claims),

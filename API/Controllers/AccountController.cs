@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+    
     public class AccountController : BaseApiController
     {
         private readonly DataContext _context;
@@ -48,7 +49,7 @@ namespace API.Controllers
         {
             return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
         }
-
+        
         [HttpPost("login")]
         public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
         {

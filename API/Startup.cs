@@ -35,7 +35,12 @@ namespace API
         {
             services.AddApplicationServices(_config);
             services.AddControllers();
-            services.AddCors();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
             services.AddIdentityServices(_config);
         }
 
@@ -51,7 +56,7 @@ namespace API
 
             app.UseRouting();
 
-            app.UseCors(policy => policy.AllowAnyMethod().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors("MyPolicy");
 
             app.UseAuthentication();
 
